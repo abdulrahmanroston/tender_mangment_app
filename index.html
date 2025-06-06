@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flex Solutions - Login</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#1a73e8">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="logo">
+                <i class="fas fa-snowflake"></i>
+                <h1>Flex Solutions</h1>
+                <p>Management System</p>
+                <small>Developed by Abdulrahman Roston</small>
+            </div>
+            
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="consumerKey">
+                        <i class="fas fa-key"></i>
+                        Consumer Key
+                    </label>
+                    <input type="text" id="consumerKey" required placeholder="Enter your consumer key">
+                </div>
+                
+                <div class="form-group">
+                    <label for="consumerSecret">
+                        <i class="fas fa-lock"></i>
+                        Consumer Secret
+                    </label>
+                    <input type="password" id="consumerSecret" required placeholder="Enter your consumer secret">
+                </div>
+                
+                <div class="form-group">
+                    <label for="storeUrl">
+                        <i class="fas fa-globe"></i>
+                        Store URL
+                    </label>
+                    <input type="url" id="storeUrl" required placeholder="https://your-store.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="appName">
+                        <i class="fas fa-tag"></i>
+                        App Name (for PWA)
+                    </label>
+                    <input type="text" id="appName" placeholder="Enter app name" value="Flex Solutions">
+                </div>
+                
+                <button type="submit" class="login-btn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Login
+                </button>
+            </form>
+            
+            <div class="login-footer">
+                <p>Secure authentication with WooCommerce API</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+        <p>Connecting to your store...</p>
+    </div>
+
+    <script src="js/auth.js"></script>
+</body>
+</html>

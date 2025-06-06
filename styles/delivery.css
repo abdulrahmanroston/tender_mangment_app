@@ -1,0 +1,418 @@
+/* Delivery Page Styles */
+.delivery-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.stat-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.5rem;
+}
+
+.stat-content h3 {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.delivery-personnel {
+  background: white;
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow);
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-header h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.section-header select {
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+  min-width: 200px;
+}
+
+.personnel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.personnel-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  transition: all 0.2s;
+}
+
+.personnel-card:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-1px);
+}
+
+.personnel-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.personnel-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.personnel-info h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.personnel-info p {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.personnel-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.personnel-stat {
+  text-align: center;
+  padding: 0.5rem;
+  background: var(--light);
+  border-radius: var(--radius);
+}
+
+.personnel-stat .number {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--primary);
+  display: block;
+}
+
+.personnel-stat .label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.personnel-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.personnel-actions button {
+  flex: 1;
+  padding: 0.5rem;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.view-orders-btn {
+  background: var(--primary);
+  color: white;
+}
+
+.view-orders-btn:hover {
+  background: var(--primary-dark);
+}
+
+.call-btn {
+  background: var(--success);
+  color: white;
+}
+
+.call-btn:hover {
+  background: #059669;
+}
+
+.delivery-orders-section {
+  background: white;
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+.delivery-orders-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.delivery-order-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.delivery-order-card:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-1px);
+}
+
+/* Special styling for orders that need collection */
+.delivery-order-card.needs-collection {
+  border-left: 4px solid var(--warning);
+  background-color: rgba(255, 247, 237, 0.5);
+}
+
+.delivery-order-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.delivery-order-id {
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.delivery-order-status {
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: white;
+}
+
+.delivery-order-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.delivery-order-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.delivery-order-actions button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.update-status-btn {
+  background: var(--primary);
+  color: white;
+}
+
+.update-status-btn:hover {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+.contact-customer-btn {
+  background: var(--success);
+  color: white;
+}
+
+.contact-customer-btn:hover {
+  background: #059669;
+  transform: translateY(-1px);
+}
+
+.view-location-btn {
+  background: var(--info);
+  color: white;
+}
+
+.view-location-btn:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
+}
+
+.collection-amount {
+  font-weight: 600;
+  color: var(--success);
+  font-size: 1rem;
+}
+
+.collection-amount.pending-collection {
+  color: var(--warning);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.delivery-person-badge {
+  background: var(--secondary);
+  color: var(--text-primary);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.detail-section {
+  background: var(--light);
+  border-radius: var(--radius);
+  padding: 1rem;
+}
+
+.detail-section h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-top: 0;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Improve button responsiveness */
+button {
+  position: relative;
+  overflow: hidden;
+}
+
+button::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%, -50%);
+  transform-origin: 50% 50%;
+}
+
+button:active::after {
+  animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 0.5;
+  }
+  20% {
+    transform: scale(25, 25);
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(40, 40);
+  }
+}
+
+@media (max-width: 768px) {
+  .delivery-stats {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .personnel-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .personnel-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .delivery-order-info {
+    grid-template-columns: 1fr;
+  }
+
+  .delivery-order-actions {
+    flex-direction: column;
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .section-header select {
+    width: 100%;
+  }
+}

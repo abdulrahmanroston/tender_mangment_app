@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Flex Solutions</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#1a73e8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/products.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-left">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1>Products Management</h1>
+            </div>
+            <div class="header-right">
+                <button class="filter-toggle-btn" id="filterToggle">
+                    <i class="fas fa-filter"></i>
+                    Filters
+                </button>
+                <button class="refresh-btn" onclick="refreshProducts()">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Sidebar -->
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-snowflake"></i>
+                <span id="appNameDisplay">Flex Solutions</span>
+            </div>
+            <ul class="sidebar-menu">
+                <li>
+                    <a href="dashboard.html">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="orders.html">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Orders</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="products.html">
+                        <i class="fas fa-box"></i>
+                        <span>Products</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="pos.html">
+                        <i class="fas fa-cash-register"></i>
+                        <span>Point of Sale</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="delivery.html">
+                        <i class="fas fa-truck"></i>
+                        <span>Delivery</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="analytics.html">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Analytics</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="settings.html">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Filters Panel -->
+            <div class="filters-panel" id="filtersPanel">
+                <div class="filters-header">
+                    <h3>Filters</h3>
+                    <button class="close-filters" id="closeFilters">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <div class="filters-content">
+                    <div class="filter-group">
+                        <label>Search Products</label>
+                        <input type="text" id="productSearch" placeholder="Search by name or category...">
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label>Stock Status</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" value="instock"> In Stock</label>
+                            <label><input type="checkbox" value="outofstock"> Out of Stock</label>
+                            <label><input type="checkbox" value="lowstock"> Low Stock</label>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label>Warehouse</label>
+                        <select id="warehouseFilter">
+                            <option value="all">All Warehouses</option>
+                            <option value="oraby">Oraby</option>
+                            <option value="lavista">Lavista</option>
+                            <option value="manufacturing">Manufacturing</option>
+                            <option value="giza">Giza</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-actions">
+                        <button class="apply-filters-btn" onclick="applyProductFilters()">Apply Filters</button>
+                        <button class="clear-filters-btn" onclick="clearProductFilters()">Clear All</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be loaded here -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Product Edit Modal -->
+    <div class="modal" id="productModal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3 id="productModalTitle">Edit Product</h3>
+                <button class="close-modal" onclick="closeProductModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="general">General</button>
+                    <button class="tab-btn" data-tab="oraby">Oraby</button>
+                    <button class="tab-btn" data-tab="lavista">Lavista</button>
+                    <button class="tab-btn" data-tab="manufacturing">Manufacturing</button>
+                    <button class="tab-btn" data-tab="giza">Giza</button>
+                </div>
+                
+                <div class="tab-content active" id="general-tab">
+                    <div class="form-group">
+                        <label>Product Name</label>
+                        <input type="text" id="productName" placeholder="Enter product name">
+                    </div>
+                    <div class="form-group">
+                        <label>Arabic Name</label>
+                        <input type="text" id="arabicName" placeholder="Enter Arabic name">
+                    </div>
+                    <div class="form-group">
+                        <label>Regular Price</label>
+                        <input type="number" id="regularPrice" step="0.01" placeholder="Enter price">
+                    </div>
+                    <div class="form-group">
+                        <label>Stock Status</label>
+                        <select id="stockStatus">
+                            <option value="instock">In Stock</option>
+                            <option value="outofstock">Out of Stock</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="oraby-tab">
+                    <div class="warehouse-stock-section">
+                        <h4>Oraby Warehouse</h4>
+                        <div class="stock-controls">
+                            <label>Current Stock</label>
+                            <div class="stock-input-group">
+                                <span class="current-stock" id="orabyCurrentStock">0</span>
+                                <div class="stock-buttons">
+                                    <button type="button" class="stock-btn minus" onclick="adjustStock('oraby', -1)">-</button>
+                                    <input type="number" id="orabyStockInput" placeholder="0" min="0">
+                                    <button type="button" class="stock-btn plus" onclick="adjustStock('oraby', 1)">+</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Warehouse Price</label>
+                            <input type="number" id="orabyPrice" step="0.01" placeholder="Enter Oraby price">
+                        </div>
+                        <div class="form-group">
+                            <label>Minimum Stock Alert</label>
+                            <input type="number" id="orabyMinStock" placeholder="Enter minimum stock">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="lavista-tab">
+                    <div class="warehouse-stock-section">
+                        <h4>Lavista Warehouse</h4>
+                        <div class="stock-controls">
+                            <label>Current Stock</label>
+                            <div class="stock-input-group">
+                                <span class="current-stock" id="lavistaCurrentStock">0</span>
+                                <div class="stock-buttons">
+                                    <button type="button" class="stock-btn minus" onclick="adjustStock('lavista', -1)">-</button>
+                                    <input type="number" id="lavistaStockInput" placeholder="0" min="0">
+                                    <button type="button" class="stock-btn plus" onclick="adjustStock('lavista', 1)">+</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Warehouse Price</label>
+                            <input type="number" id="lavistaPrice" step="0.01" placeholder="Enter Lavista price">
+                        </div>
+                        <div class="form-group">
+                            <label>Minimum Stock Alert</label>
+                            <input type="number" id="lavistaMinStock" placeholder="Enter minimum stock">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="manufacturing-tab">
+                    <div class="warehouse-stock-section">
+                        <h4>Manufacturing Warehouse</h4>
+                        <div class="stock-controls">
+                            <label>Current Stock</label>
+                            <div class="stock-input-group">
+                                <span class="current-stock" id="manufacturingCurrentStock">0</span>
+                                <div class="stock-buttons">
+                                    <button type="button" class="stock-btn minus" onclick="adjustStock('manufacturing', -1)">-</button>
+                                    <input type="number" id="manufacturingStockInput" placeholder="0" min="0">
+                                    <button type="button" class="stock-btn plus" onclick="adjustStock('manufacturing', 1)">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="giza-tab">
+                    <div class="warehouse-stock-section">
+                        <h4>Giza Warehouse</h4>
+                        <div class="stock-controls">
+                            <label>Current Stock</label>
+                            <div class="stock-input-group">
+                                <span class="current-stock" id="gizaCurrentStock">0</span>
+                                <div class="stock-buttons">
+                                    <button type="button" class="stock-btn minus" onclick="adjustStock('giza', -1)">-</button>
+                                    <input type="number" id="gizaStockInput" placeholder="0" min="0">
+                                    <button type="button" class="stock-btn plus" onclick="adjustStock('giza', 1)">+</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Warehouse Price</label>
+                            <input type="number" id="gizaPrice" step="0.01" placeholder="Enter Giza price">
+                        </div>
+                        <div class="form-group">
+                            <label>Minimum Stock Alert</label>
+                            <input type="number" id="gizaMinStock" placeholder="Enter minimum stock">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-actions">
+                    <button class="btn btn-primary" onclick="updateProduct()">Update Product</button>
+                    <button class="btn btn-secondary" onclick="closeProductModal()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+        <p>Loading products...</p>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/products.js"></script>
+</body>
+</html>

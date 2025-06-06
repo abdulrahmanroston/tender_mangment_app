@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Point of Sale - Tender Frozen</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#1a73e8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/pos.css">
+</head>
+<body>
+    <div class="app-container pos-layout">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-left">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1>Point of Sale</h1>
+            </div>
+            <div class="header-right">
+                <div class="warehouse-selector">
+                    <select id="warehouseSelect">
+                        <option value="">Select Warehouse</option>
+                        <option value="oraby">Oraby</option>
+                        <option value="lavista">Lavista</option>
+                        <option value="giza">Giza</option>
+                        <option value="manufacturing">Manufacturing</option>
+                    </select>
+                </div>
+                <button class="clear-cart-btn" onclick="clearCart()">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Sidebar -->
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-snowflake"></i>
+                <span>Tender Frozen</span>
+            </div>
+            <ul class="sidebar-menu">
+                <li>
+                    <a href="dashboard.html">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="orders.html">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Orders</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="products.html">
+                        <i class="fas fa-box"></i>
+                        <span>Products</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="pos.html">
+                        <i class="fas fa-cash-register"></i>
+                        <span>Point of Sale</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="analytics.html">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Analytics</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content pos-main">
+            <!-- Products Section -->
+            <div class="products-section">
+                <div class="products-header">
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="productSearch" placeholder="Search products...">
+                    </div>
+                    <div class="category-tabs" id="categoryTabs">
+                        <!-- Categories will be loaded here -->
+                    </div>
+                </div>
+                
+                <div class="products-grid" id="posProductsGrid">
+                    <!-- Products will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Cart Section -->
+            <div class="cart-section">
+                <div class="cart-header">
+                    <h3>Cart</h3>
+                    <span class="cart-count" id="cartCount">0 items</span>
+                </div>
+                
+                <div class="cart-items" id="cartItems">
+                    <!-- Cart items will be loaded here -->
+                </div>
+                
+                <div class="cart-summary">
+                    <div class="summary-row">
+                        <span>Subtotal:</span>
+                        <span id="cartSubtotal">EGP 0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Delivery Fee:</span>
+                        <span id="cartDeliveryFee">EGP 0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Discount:</span>
+                        <span id="cartDiscount">EGP 0.00</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total:</span>
+                        <span id="cartTotal">EGP 0.00</span>
+                    </div>
+                </div>
+                
+                <div class="cart-actions">
+                    <button class="customer-btn" onclick="openCustomerModal()">
+                        <i class="fas fa-user"></i>
+                        Customer
+                    </button>
+                    <button class="checkout-btn" onclick="proceedToCheckout()">
+                        <i class="fas fa-credit-card"></i>
+                        Checkout
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Customer Modal -->
+    <div class="modal" id="customerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Customer Information</h3>
+                <button class="close-modal" onclick="closeCustomerModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="customer-search">
+                    <input type="text" id="customerSearchInput" placeholder="Search existing customers...">
+                    <div class="customer-results" id="customerResults"></div>
+                </div>
+                
+                <div class="customer-form" id="customerForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Customer Name *</label>
+                            <input type="text" id="customerName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email *</label>
+                            <input type="email" id="customerEmail" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Phone *</label>
+                            <input type="tel" id="customerPhone" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Zone *</label>
+                            <input type="text" id="customerZone" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Address *</label>
+                        <textarea id="customerAddress" required></textarea>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Delivery Date</label>
+                            <input type="date" id="deliveryDate">
+                        </div>
+                        <div class="form-group">
+                            <label>Delivery Time</label>
+                            <select id="deliveryTime">
+                                <option value="12:00PM To 2:00PM">12:00PM - 2:00PM</option>
+                                <option value="2:00PM To 4:00PM">2:00PM - 4:00PM</option>
+                                <option value="4:00PM To 6:00PM">4:00PM - 6:00PM</option>
+                                <option value="6:00PM To 8:00PM">6:00PM - 8:00PM</option>
+                                <option value="8:00PM To 10:00PM">8:00PM - 10:00PM</option>
+                                <option value="10:00PM To 12:00AM">10:00PM - 12:00AM</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Delivery Fee</label>
+                        <input type="number" id="deliveryFeeInput" step="0.01" min="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Payment Method</label>
+                        <select id="paymentMethod">
+                            <option value="cod">Cash on Delivery</option>
+                            <option value="card">Card on Delivery</option>
+                            <option value="online">Online Payment</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="modal-actions">
+                    <button class="save-customer-btn" onclick="saveCustomerInfo()">Save Customer</button>
+                    <button class="cancel-btn" onclick="closeCustomerModal()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+        <p>Processing...</p>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/pos.js"></script>
+</body>
+</html>
